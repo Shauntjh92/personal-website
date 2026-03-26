@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shaun Toh — Data Scientist / Analytics Engineer</title>
+  <meta name="description" content="Shaun Toh — Data Scientist and Analytics Engineer with expertise in Python, SQL, data visualization, and building data-driven solutions.">
+
+  <style>
+    /* ─── Fonts ─────────────────────────────────────────────────────────────── */
+    @font-face {
+      font-family: 'Instrument Serif';
+      src: url('hideo/assets/fonts/instrument-serif/instrument-serif-400.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Instrument Serif';
+      src: url('hideo/assets/fonts/instrument-serif/instrument-serif-400-italic.woff2') format('woff2');
+      font-weight: 400;
+      font-style: italic;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Open Sauce Two';
+      src: url('hideo/assets/fonts/open-sauce-two/open-sauce-two-500.woff2') format('woff2');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Open Sauce Two';
+      src: url('hideo/assets/fonts/open-sauce-two/open-sauce-two-700.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Open Sauce Two';
+      src: url('hideo/assets/fonts/open-sauce-two/open-sauce-two-800.woff2') format('woff2');
+      font-weight: 800;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* ─── Variables ─────────────────────────────────────────────────────────── */
+    :root {
+      --color-0:   #FFFFFF;
+      --color-10:  #ECE7E1;
+      --color-30:  #D4CFC8;
+      --color-70:  #75736E;
+      --color-100: #15151C;
+
+      --font-heading: 'Instrument Serif', ui-serif, Georgia, serif;
+      --font-body:    'Open Sauce Two', ui-sans-serif, sans-serif;
+
+      --body-margin:   clamp(24px, 4.166vw, 32px);
+      --sidebar-width: 256px;
+      --radius-card:   clamp(12px, 3.125vw, 24px);
+
+      --fs-body:   clamp(16px, 1vw, 18px);
+      --fs-large:  clamp(15px, 1vw, 17px);
+      --fs-h1:     clamp(72px, 10vw, 128px);
+      --fs-h2:     clamp(56px, 8vw, 96px);
+      --fs-h3:     clamp(24px, 3vw, 32px);
+      --fs-small:  14px;
+      --fs-label:  12px;
+    }
+
+    /* ─── Reset ─────────────────────────────────────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--color-10);
+      color: var(--color-100);
+      font-family: var(--font-body);
+      font-size: var(--fs-body);
+      font-weight: 500;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* ─── Site Layout ────────────────────────────────────────────────────────── */
+    .site-layout {
+      display: flex;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    /* ─── Sidebar ────────────────────────────────────────────────────────────── */
+    .site-sidebar {
+      width: var(--sidebar-width);
+      flex-shrink: 0;
+      border-right: 1px solid var(--color-30);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: var(--body-margin);
+    }
+
+    .sidebar-top {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(32px, 5vw, 48px);
+    }
+
+    .site-title {
+      font-family: var(--font-body);
+      font-size: var(--fs-body);
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .site-title a {
+      text-decoration: none;
+    }
+
+    .site-title a:hover {
+      text-decoration: underline;
+    }
+
+    .sidebar-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-nav li a {
+      display: block;
+      text-decoration: none;
+      padding: 0.15em 0;
+      transition: opacity 0.15s;
+    }
+
+    .sidebar-nav li a:hover {
+      text-decoration: underline;
+    }
+
+    .sidebar-bottom {
+      color: var(--color-70);
+      font-size: var(--fs-small);
+    }
+
+    /* ─── Main Content ───────────────────────────────────────────────────────── */
+    .site-main {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ─── Desktop Header Bar ─────────────────────────────────────────────────── */
+    .site-header-desktop {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: var(--body-margin);
+      border-bottom: 1px solid var(--color-30);
+      flex-wrap: wrap;
+      gap: 0.5em;
+    }
+
+    .site-header-desktop .header-name {
+      font-weight: 500;
+    }
+
+    .site-header-desktop .header-title {
+      color: var(--color-70);
+    }
+
+    /* ─── Mobile Header ──────────────────────────────────────────────────────── */
+    .site-header-mobile {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: var(--color-10);
+      border-bottom: 1px solid var(--color-30);
+      padding: 16px var(--body-margin);
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mobile-site-title {
+      font-weight: 500;
+      font-size: var(--fs-body);
+    }
+
+    .hamburger {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      color: var(--color-100);
+    }
+
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: currentColor;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+
+    .hamburger.is-open span:nth-child(1) {
+      transform: translateY(6.5px) rotate(45deg);
+    }
+
+    .hamburger.is-open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.is-open span:nth-child(3) {
+      transform: translateY(-6.5px) rotate(-45deg);
+    }
+
+    /* ─── Mobile Nav Overlay ─────────────────────────────────────────────────── */
+    .mobile-nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99;
+      background-color: var(--color-10);
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--body-margin);
+    }
+
+    .mobile-nav-overlay.is-open {
+      display: flex;
+    }
+
+    .mobile-nav-overlay ul {
+      list-style: none;
+    }
+
+    .mobile-nav-overlay ul li {
+      border-top: 1px solid var(--color-30);
+    }
+
+    .mobile-nav-overlay ul li:last-child {
+      border-bottom: 1px solid var(--color-30);
+    }
+
+    .mobile-nav-overlay ul li a {
+      display: block;
+      text-decoration: none;
+      font-size: clamp(28px, 6vw, 40px);
+      font-family: var(--font-heading);
+      font-weight: 400;
+      line-height: 1;
+      padding: 0.6em 0;
+      transition: opacity 0.15s;
+    }
+
+    .mobile-nav-overlay ul li a:hover {
+      opacity: 0.6;
+    }
+
+    /* ─── Sections ───────────────────────────────────────────────────────────── */
+    .site-section {
+      border-top: 1px solid var(--color-30);
+      padding: var(--body-margin);
+    }
+
+    /* ─── About Section ──────────────────────────────────────────────────────── */
+    .about-section {
+      min-height: 66vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: clamp(32px, 5vw, 64px);
+    }
+
+    .about-heading {
+      font-family: var(--font-heading);
+      font-size: var(--fs-h1);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+
+    .about-body {
+      display: flex;
+      gap: var(--body-margin);
+      align-items: flex-start;
+    }
+
+    .about-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .about-text p {
+      font-size: var(--fs-large);
+      line-height: 1.5;
+      color: var(--color-100);
+    }
+
+    .about-text p + p {
+      margin-top: 1.2rem;
+    }
+
+    .about-photo-wrap {
+      flex-shrink: 0;
+      width: clamp(160px, 22vw, 240px);
+    }
+
+    .about-photo {
+      width: 100%;
+      height: clamp(220px, 33vw, 340px);
+      object-fit: cover;
+      object-position: top center;
+      border-radius: var(--radius-card);
+    }
+
+    /* ─── Buttons ────────────────────────────────────────────────────────────── */
+    .btn-group {
+      display: flex;
+      gap: 0.888em;
+      flex-wrap: wrap;
+      margin-top: var(--body-margin);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: calc(0.44em - 1px) calc(1em - 1px);
+      border: 1px solid var(--color-30);
+      border-radius: 99px;
+      text-decoration: none;
+      color: var(--color-100);
+      font-family: var(--font-body);
+      font-size: var(--fs-body);
+      font-weight: 500;
+      line-height: 1.5;
+      cursor: pointer;
+      background: transparent;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .btn:hover {
+      text-decoration: underline;
+    }
+
+    /* ─── Projects Section ───────────────────────────────────────────────────── */
+    .projects-section {
+      min-height: 50vh;
+    }
+
+    .section-heading {
+      font-family: var(--font-heading);
+      font-size: var(--fs-h2);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.01em;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--body-margin);
+      margin-top: var(--body-margin);
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--color-30);
+      border-radius: var(--radius-card);
+      padding: var(--body-margin);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s;
+      min-height: 200px;
+    }
+
+    .project-card:hover {
+      background: var(--color-30);
+    }
+
+    .project-card-top {
+      flex: 1;
+    }
+
+    .project-name {
+      font-family: var(--font-heading);
+      font-size: var(--fs-h3);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+
+    .project-desc {
+      color: var(--color-70);
+      margin-top: 0.6em;
+      font-size: var(--fs-body);
+      line-height: 1.5;
+    }
+
+    .project-tag {
+      display: inline-block;
+      border: 1px solid var(--color-30);
+      border-radius: 99px;
+      padding: 0.2em 0.8em;
+      font-size: var(--fs-small);
+      color: var(--color-70);
+      margin-top: 1.2em;
+      transition: border-color 0.2s;
+    }
+
+    .project-card:hover .project-tag {
+      border-color: var(--color-70);
+    }
+
+    /* ─── Skills Section ─────────────────────────────────────────────────────── */
+    .skills-section {
+      min-height: 40vh;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: var(--body-margin);
+      margin-top: var(--body-margin);
+    }
+
+    .skill-group-label {
+      font-size: var(--fs-label);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-70);
+      margin-bottom: 0.6em;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4em;
+    }
+
+    .skill-tag {
+      display: inline-block;
+      border: 1px solid var(--color-30);
+      border-radius: 99px;
+      padding: 0.2em 0.8em;
+      font-size: var(--fs-small);
+      color: var(--color-100);
+    }
+
+    /* ─── Footer ─────────────────────────────────────────────────────────────── */
+    .site-footer {
+      border-top: 1px solid var(--color-30);
+      padding: var(--body-margin);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1em;
+    }
+
+    .site-footer p,
+    .site-footer a {
+      color: var(--color-70);
+      font-size: var(--fs-small);
+      text-decoration: none;
+    }
+
+    .site-footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ─── Mobile Styles ──────────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .site-sidebar {
+        display: none;
+      }
+
+      .site-header-desktop {
+        display: none;
+      }
+
+      .site-header-mobile {
+        display: flex;
+      }
+
+      .about-body {
+        flex-direction: column-reverse;
+      }
+
+      .about-photo-wrap {
+        width: 100%;
+      }
+
+      .about-photo {
+        width: 100%;
+        height: clamp(240px, 60vw, 320px);
+      }
+
+      .skills-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      .btn-group {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Mobile Header ──────────────────────────────────────────────────────── -->
+  <header class="site-header-mobile" id="mobile-header">
+    <span class="mobile-site-title">Shaun Toh</span>
+    <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- ── Mobile Nav Overlay ─────────────────────────────────────────────────── -->
+  <nav class="mobile-nav-overlay" id="mobile-nav" aria-hidden="true">
+    <ul>
+      <li><a href="#about"    onclick="closeNav()">About</a></li>
+      <li><a href="#projects" onclick="closeNav()">Projects</a></li>
+      <li><a href="#skills"   onclick="closeNav()">Skills</a></li>
+      <li><a href="Resume-Toh%20Jia%20Hui%20Shaun_180126_DS.pdf" download="Resume-Toh Jia Hui Shaun_180126_DS.pdf" onclick="closeNav()">Download CV</a></li>
+      <li><a href="https://www.linkedin.com/in/shauntjh-s629952r/" target="_blank" rel="noopener" onclick="closeNav()">LinkedIn ↗</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── Site Layout ────────────────────────────────────────────────────────── -->
+  <div class="site-layout">
+
+    <!-- Sidebar -->
+    <aside class="site-sidebar">
+      <div class="sidebar-top">
+        <div class="site-title">
+          <a href="#">Shaun Toh</a>
+        </div>
+        <nav>
+          <ul class="sidebar-nav">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="Resume-Toh%20Jia%20Hui%20Shaun_180126_DS.pdf" download="Resume-Toh Jia Hui Shaun_180126_DS.pdf">Download CV</a></li>
+            <li><a href="https://www.linkedin.com/in/shauntjh-s629952r/" target="_blank" rel="noopener">LinkedIn ↗</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="sidebar-bottom">
+        © 2025
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <div class="site-main">
+
+      <!-- Desktop Header -->
+      <div class="site-header-desktop">
+        <span class="header-name">Shaun Toh</span>
+        <span class="header-title">Data Scientist / Analytics Engineer</span>
+      </div>
+
+      <!-- ── About ─────────────────────────────────────────────────────────── -->
+      <section id="about" class="site-section about-section">
+
+        <h1 class="about-heading">About Shaun</h1>
+
+        <div class="about-body">
+          <div class="about-text">
+            <p>As an experienced data analyst with a diverse background spanning manufacturing and tech start-ups, I have developed a unique skill set that allows me to extract insights from complex data sets and communicate them effectively to stakeholders. Throughout my career, I have honed my ability to manage stakeholders and deliver results that align with business objectives.</p>
+            <p>In my previous roles, I have been responsible for analyzing and interpreting data to drive business decisions, optimize processes, and improve overall performance. My expertise in data visualization and statistical analysis has enabled me to identify key trends and patterns, providing valuable insights to guide strategic decision-making.</p>
+            <p>I am passionate about utilizing my skills to drive innovation and growth in dynamic environments. With a strong foundation in both manufacturing and tech start-ups, I bring a unique perspective to the table and am comfortable navigating a variety of industries and situations.</p>
+            <div class="btn-group">
+              <a class="btn" href="Resume-Toh%20Jia%20Hui%20Shaun_180126_DS.pdf" download="Resume-Toh Jia Hui Shaun_180126_DS.pdf">Download CV</a>
+              <a class="btn" href="https://www.linkedin.com/in/shauntjh-s629952r/" target="_blank" rel="noopener">LinkedIn ↗</a>
+            </div>
+          </div>
+          <div class="about-photo-wrap">
+            <img
+              class="about-photo"
+              src="Profile-pic-Halfbody.jpg"
+              alt="Shaun Toh"
+              loading="eager"
+            >
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ── Projects ──────────────────────────────────────────────────────── -->
+      <section id="projects" class="site-section projects-section">
+
+        <h2 class="section-heading">Projects</h2>
+
+        <div class="projects-grid">
+
+          <a class="project-card" href="https://github.com/Shauntjh92/Wifey-app" target="_blank" rel="noopener">
+            <div class="project-card-top">
+              <h3 class="project-name">Wifey App</h3>
+              <p class="project-desc">A personal app built for my wife — a Singapore mall store finder built with FastAPI, PostgreSQL, and React.</p>
+            </div>
+            <span class="project-tag">View on GitHub ↗</span>
+          </a>
+
+        </div>
+
+      </section>
+
+      <!-- ── Skills ────────────────────────────────────────────────────────── -->
+      <section id="skills" class="site-section skills-section">
+
+        <h2 class="section-heading">Skills</h2>
+
+        <div class="skills-grid">
+
+          <div class="skill-group">
+            <p class="skill-group-label">Programming</p>
+            <div class="skill-tags">
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">PySpark</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <p class="skill-group-label">Data Management</p>
+            <div class="skill-tags">
+              <span class="skill-tag">SQL Server</span>
+              <span class="skill-tag">MySQL</span>
+              <span class="skill-tag">Presto</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <p class="skill-group-label">Project Management</p>
+            <div class="skill-tags">
+              <span class="skill-tag">Azure DevOps</span>
+              <span class="skill-tag">JIRA</span>
+              <span class="skill-tag">Confluence</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <p class="skill-group-label">Data Visualization</p>
+            <div class="skill-tags">
+              <span class="skill-tag">Tableau</span>
+              <span class="skill-tag">Power BI</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <p class="skill-group-label">Certifications</p>
+            <div class="skill-tags">
+              <span class="skill-tag">MSc. Intelligent Systems</span>
+              <span class="skill-tag">Specialist Diploma in AI</span>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- ── Footer ────────────────────────────────────────────────────────── -->
+      <footer class="site-footer">
+        <p>© 2025 Shaun Toh</p>
+        <a href="https://www.linkedin.com/in/shauntjh-s629952r/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </footer>
+
+    </div><!-- /site-main -->
+  </div><!-- /site-layout -->
+
+  <script>
+    const btn = document.getElementById('hamburger-btn');
+    const nav = document.getElementById('mobile-nav');
+
+    function closeNav() {
+      btn.classList.remove('is-open');
+      btn.setAttribute('aria-expanded', 'false');
+      nav.classList.remove('is-open');
+      nav.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    btn.addEventListener('click', () => {
+      const isOpen = nav.classList.contains('is-open');
+      if (isOpen) {
+        closeNav();
+      } else {
+        btn.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+        nav.classList.add('is-open');
+        nav.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+    });
+
+    // Close overlay on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeNav();
+    });
+  </script>
+
+</body>
+</html>
