@@ -42,16 +42,18 @@ The `hideo/` folder is not a functioning WordPress theme here — it is kept sol
 
 All styling lives inside a `<style>` block in `index.html`. CSS variables:
 
-| Variable | Value | Usage |
-|---|---|---|
-| `--color-10` | `#ECE7E1` | Page background |
-| `--color-100` | `#15151C` | Primary text |
-| `--color-30` | `#D4CFC8` | Borders, card hover |
-| `--color-70` | `#75736E` | Secondary/dim text |
-| `--color-0` | `#FFFFFF` | White |
-| `--body-margin` | `clamp(24px, 4.166vw, 32px)` | Universal padding |
-| `--font-heading` | Instrument Serif | All `h1`/`h2`/`h3` |
-| `--font-body` | Open Sauce Two | All body text |
+| Variable | Light value | Dark value | Usage |
+|---|---|---|---|
+| `--color-10` | `#ECE7E1` | `#1a1a22` | Page background |
+| `--color-100` | `#15151C` | `#ECE7E1` | Primary text |
+| `--color-30` | `#D4CFC8` | `#2e2e3a` | Borders, card hover |
+| `--color-70` | `#75736E` | `#8a8880` | Secondary/dim text |
+| `--color-0` | `#FFFFFF` | `#0f0f16` | White |
+| `--body-margin` | `clamp(24px, 4.166vw, 32px)` | — | Universal padding |
+| `--font-heading` | Instrument Serif | — | All `h1`/`h2`/`h3` |
+| `--font-body` | Open Sauce Two | — | All body text |
+
+Dark mode is applied via `[data-theme="dark"]` on `<html>`. Toggle persists to `localStorage` under the key `theme`.
 
 Font sizes:
 - H1: `clamp(72px, 10vw, 128px)`
@@ -63,9 +65,9 @@ Font sizes:
 
 **Desktop:** 256px sticky sidebar (left) + flexible main content (right)
 - Sidebar: `position: sticky; top: 0; height: 100vh; border-right: 1px solid #D4CFC8`
-- Desktop header bar: title only (right-aligned), `border-bottom: 1px solid #D4CFC8` — name was removed
+- Desktop header bar: job title (left) + GitHub icon + dark mode toggle (right), `border-bottom: 1px solid #D4CFC8` — name was removed
 
-**Mobile (≤768px):** Sticky top bar with hamburger → full-screen nav overlay
+**Mobile (≤768px):** Sticky top bar with name (left) + GitHub icon + dark mode toggle + hamburger (right) → full-screen nav overlay
 
 ## Page Sections
 
@@ -74,7 +76,7 @@ Font sizes:
 | About | `#about` | Bio, profile photo, CV download + LinkedIn buttons; heading is "About" (no name) |
 | Projects | `#projects` | Cards grid; two projects: Wifey App, Analyst AI Dashboard |
 | Skills | `#skills` | Pill-tag groups by category |
-| Footer | — | Copyright + LinkedIn link |
+| Footer | — | LinkedIn link only (copyright removed) |
 
 ## Owner Content
 
@@ -107,3 +109,7 @@ Font sizes:
 **Change bio text:** Edit the `<p>` tags inside `.about-text` in `index.html`.
 
 **Adjust font sizes:** Edit CSS variables in the `:root` block at the top of the `<style>` tag.
+
+**Toggle dark mode colours:** Edit the `[data-theme="dark"]` block directly below `:root` in the `<style>` tag.
+
+**Add header action icons:** Add `.icon-btn` elements inside `.header-actions` (desktop) and `.mobile-header-right` (mobile).
